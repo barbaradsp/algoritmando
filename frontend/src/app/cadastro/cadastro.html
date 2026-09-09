@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="card">
+    <h2>📝 Cadastro</h2>
+    <p class="subtitle">Preencha seus dados para começar o quiz</p>
+
+    <form (ngSubmit)="cadastrar()">
+      <label for="nome">Nome</label>
+      <input
+        id="nome"
+        type="text"
+        [(ngModel)]="nome"
+        name="nome"
+        required
+        placeholder="Seu nome"
+      />
+
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        placeholder="seu@email.com"
+      />
+
+      <button type="submit" [disabled]="!nome || !email || carregando">
+        {{ carregando ? 'Enviando...' : 'Continuar' }}
+      </button>
+
+      <p class="erro" *ngIf="erro">{{ erro }}</p>
+    </form>
+  </div>
+</div>

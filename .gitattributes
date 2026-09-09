@@ -1,0 +1,6 @@
+# Default
+* text=auto
+
+# Maven Wrapper
+backend/mvnw text eol=lf
+backend/mvnw.cmd text eol=crlf

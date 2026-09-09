@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+}
+
+h2 {
+  color: #1f2937;
+  margin-bottom: 24px;
+}
+
+.pontuacao-destaque {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #6366f1;
+  margin-bottom: 16px;
+}
+
+.detalhe {
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
+.barra-acertos {
+  background: #e5e7eb;
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.barra-fill {
+  background: #22c55e;
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+button {
+  background: #6366f1;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #4f46e5;
+}
+
+.erro {
+  color: #dc2626;
+  text-align: center;
+}

@@ -1,0 +1,100 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 560px;
+}
+
+.progress-bar {
+  background: #e5e7eb;
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  background: #6366f1;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.contador {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #1f2937;
+  margin-bottom: 24px;
+  font-size: 1.3rem;
+}
+
+.alternativas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.alternativa {
+  text-align: left;
+  padding: 14px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #374151;
+  transition: all 0.15s;
+}
+
+.alternativa:hover {
+  border-color: #a5b4fc;
+  background: #f5f5ff;
+}
+
+.alternativa.selecionada {
+  border-color: #6366f1;
+  background: #eef2ff;
+  font-weight: 600;
+}
+
+.btn-proxima {
+  width: 100%;
+  background: #6366f1;
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-proxima:hover:not(:disabled) {
+  background: #4f46e5;
+}
+
+.btn-proxima:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+}
+
+.erro {
+  color: #dc2626;
+  text-align: center;
+}
