@@ -8,7 +8,11 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { ApiService } from '../services/api.service';
-import { QuizStateService } from '../services/quiz-state.service';
+
+import {
+  QuizStateService
+} from '../services/quiz-state.service';
+
 import {
   ResultadoResponse
 } from '../models/resultado.model';
@@ -16,18 +20,23 @@ import {
 @Component({
   selector: 'app-pontuacao',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './pontuacao.html',
   styleUrl: './pontuacao.css'
 })
-export class Pontuacao implements OnInit {
+export class Pontuacao
+  implements OnInit {
 
   resultado:
     ResultadoResponse | null = null;
 
-  carregando: boolean = true;
+  carregando:
+    boolean = true;
 
-  erro: string = '';
+  erro:
+    string = '';
 
   constructor(
     private api: ApiService,
@@ -38,13 +47,33 @@ export class Pontuacao implements OnInit {
 
   ngOnInit(): void {
 
+    /*
+     * Caso esteja voltando da tela
+     * de revisão, não calcula e não
+     * salva o resultado novamente.
+     */
+    if (
+      this.quizState.resultadoAtual
+    ) {
+
+      this.resultado =
+        this.quizState.resultadoAtual;
+
+      this.carregando =
+        false;
+
+      return;
+    }
+
     if (
       !this.quizState.nomeUsuario ||
       !this.quizState.quizId ||
       this.quizState.respostas.length === 0
     ) {
 
-      this.router.navigate(['/']);
+      this.router.navigate([
+        '/'
+      ]);
 
       return;
     }
@@ -62,18 +91,28 @@ export class Pontuacao implements OnInit {
 
     }).subscribe({
 
-      next: (resultado) => {
+      next: (
+        resultado
+      ) => {
 
         this.resultado =
           resultado;
 
+        this.quizState
+          .salvarResultado(
+            resultado
+          );
+
         this.carregando =
           false;
 
-        this.cdr.detectChanges();
+        this.cdr
+          .detectChanges();
       },
 
-      error: (err) => {
+      error: (
+        err
+      ) => {
 
         console.error(
           'Erro ao calcular resultado:',
@@ -86,10 +125,18 @@ export class Pontuacao implements OnInit {
         this.carregando =
           false;
 
-        this.cdr.detectChanges();
+        this.cdr
+          .detectChanges();
       }
 
     });
+  }
+
+  revisarRespostas(): void {
+
+    this.router.navigate([
+      '/revisao'
+    ]);
   }
 
   irParaFinal(): void {

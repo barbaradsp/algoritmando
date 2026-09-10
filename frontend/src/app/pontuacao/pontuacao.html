@@ -1,5 +1,6 @@
 <div class="container">
 
+  <!-- Carregando -->
   <div
     class="card"
     *ngIf="carregando"
@@ -9,6 +10,8 @@
     </p>
   </div>
 
+
+  <!-- Erro -->
   <div
     class="card"
     *ngIf="erro"
@@ -18,6 +21,8 @@
     </p>
   </div>
 
+
+  <!-- Resultado -->
   <div
     class="card"
     *ngIf="
@@ -35,12 +40,11 @@
       {{ resultado.quizTitulo }}
     </p>
 
+
     <div class="pontuacao-destaque">
-
-      {{ resultado.pontuacao }}
-      pontos
-
+      {{ resultado.pontuacao }} pontos
     </div>
+
 
     <p class="detalhe">
 
@@ -60,22 +64,34 @@
 
     </p>
 
+
     <div class="barra-acertos">
 
       <div
         class="barra-fill"
-        [style.width.%]="
-          resultado.pontuacao
-        "
+        [style.width.%]="resultado.pontuacao"
       ></div>
 
     </div>
 
-    <button
-      (click)="irParaFinal()"
-    >
-      Continuar
-    </button>
+
+    <div class="acoes">
+
+      <button
+        class="btn-secundario"
+        (click)="revisarRespostas()"
+      >
+        Revisar respostas
+      </button>
+
+      <button
+        class="btn-principal"
+        (click)="irParaFinal()"
+      >
+        Continuar
+      </button>
+
+    </div>
 
   </div>
 
