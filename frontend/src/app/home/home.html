@@ -1,8 +1,82 @@
 <div class="container">
-  <div class="card">
-    <h1>🎮 Algoritmando</h1>
-    <p class="subtitle">Teste seus conhecimentos em lógica de programação e algoritmos!</p>
-    <p class="info">São 5 perguntas rápidas. A cada acerto você ganha pontos. Vamos lá?</p>
-    <button (click)="iniciar()">Começar</button>
+  <div class="content">
+    <div class="header">
+      <h1>🎮 Algoritmando</h1>
+
+      <p class="subtitle">
+        Teste seus conhecimentos em algoritmos,
+        estruturas de dados e complexidade.
+      </p>
+
+      <p class="descricao">
+        Escolha um desafio para começar.
+      </p>
+    </div>
+
+    <div
+      class="status-card"
+      *ngIf="carregando"
+    >
+      Carregando quizzes...
+    </div>
+
+    <div
+      class="status-card erro"
+      *ngIf="erro"
+    >
+      {{ erro }}
+    </div>
+
+    <div
+      class="quizzes"
+      *ngIf="!carregando && !erro"
+    >
+
+      <div
+        class="quiz-card"
+        *ngFor="let quiz of quizzes"
+      >
+
+        <div class="quiz-topo">
+
+          <span class="categoria">
+            {{ formatarCategoria(quiz.categoria) }}
+          </span>
+
+          <span
+            class="dificuldade"
+            [class.facil]="quiz.dificuldade === 'FACIL'"
+            [class.medio]="quiz.dificuldade === 'MEDIO'"
+            [class.dificil]="quiz.dificuldade === 'DIFICIL'"
+          >
+            {{ formatarDificuldade(quiz.dificuldade) }}
+          </span>
+
+        </div>
+
+        <h2>
+          {{ quiz.titulo }}
+        </h2>
+
+        <p class="quiz-descricao">
+          {{ quiz.descricao }}
+        </p>
+
+        <div class="quiz-footer">
+
+          <span class="quantidade">
+            {{ quiz.quantidadePerguntas }}
+            perguntas
+          </span>
+
+          <button
+            (click)="selecionarQuiz(quiz)"
+          >
+            Começar →
+          </button>
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>

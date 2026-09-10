@@ -78,3 +78,19 @@ button:disabled {
   margin-top: 12px;
   text-align: center;
 }
+
+.quiz-selecionado {
+  display: inline-block;
+
+  margin: 12px 0 4px;
+
+  padding: 7px 10px;
+
+  background: #eef2ff;
+
+  color: #4f46e5;
+
+  border-radius: 8px;
+
+  font-size: 0.9rem;
+}

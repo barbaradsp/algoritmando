@@ -98,3 +98,17 @@ h2 {
   color: #dc2626;
   text-align: center;
 }
+
+.quiz-titulo {
+  color: #6366f1;
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+
+  margin-bottom: 12px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+}
