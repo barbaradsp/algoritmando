@@ -1,77 +1,172 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  font-family: 'Segoe UI', sans-serif;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #8b5cf6
+    );
+
+  padding: 30px;
+
+  font-family:
+    'Segoe UI',
+    sans-serif;
 }
 
 .card {
-  background: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  max-width: 420px;
   width: 100%;
+
+  max-width: 560px;
+
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 42px;
+
+  text-align: center;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.2);
 }
 
-h2 {
+.card h2 {
+  margin-top: 0;
+
+  margin-bottom: 12px;
+
+  font-size: 1.8rem;
+
   color: #1f2937;
-  margin-bottom: 24px;
+}
+
+.quiz-nome {
+  color: #6366f1;
+
+  font-weight: 700;
+
+  margin-bottom: 28px;
 }
 
 .pontuacao-destaque {
-  font-size: 3rem;
+  font-size: 3.2rem;
+
   font-weight: 800;
+
   color: #6366f1;
+
   margin-bottom: 16px;
 }
 
 .detalhe {
   color: #4b5563;
-  margin-bottom: 20px;
+
+  font-size: 1.05rem;
+
+  margin-bottom: 24px;
 }
 
 .barra-acertos {
+  width: 100%;
+
+  height: 14px;
+
   background: #e5e7eb;
+
   border-radius: 999px;
-  height: 12px;
+
   overflow: hidden;
-  margin-bottom: 28px;
+
+  margin-bottom: 30px;
 }
 
 .barra-fill {
-  background: #22c55e;
   height: 100%;
-  transition: width 0.5s ease;
+
+  background: #22c55e;
+
+  border-radius: 999px;
+
+  transition:
+    width 0.4s ease;
 }
 
-button {
-  background: #6366f1;
-  color: white;
-  border: none;
-  padding: 14px 32px;
-  font-size: 1.1rem;
-  border-radius: 8px;
+.acoes {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+}
+
+.acoes button {
+  padding: 12px 20px;
+
+  border-radius: 9px;
+
+  font-size: 1rem;
+
   cursor: pointer;
-  transition: background 0.2s;
+
+  transition: 0.2s;
+
+  min-width: 160px;
 }
 
-button:hover {
+.btn-principal {
+  border: none;
+
+  background: #6366f1;
+
+  color: white;
+}
+
+.btn-principal:hover {
   background: #4f46e5;
+}
+
+.btn-secundario {
+  background: white;
+
+  border: 1px solid #6366f1;
+
+  color: #6366f1;
+}
+
+.btn-secundario:hover {
+  background: #eef2ff;
 }
 
 .erro {
   color: #dc2626;
-  text-align: center;
 }
 
-.quiz-nome {
-  color: #6366f1;
-  font-weight: 700;
-  font-size: 0.95rem;
-  margin-top: -12px;
-  margin-bottom: 24px;
+@media (
+max-width: 600px
+) {
+
+  .card {
+    padding: 30px 20px;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+
+  .acoes button {
+    width: 100%;
+  }
+
+  .pontuacao-destaque {
+    font-size: 2.6rem;
+  }
 }

@@ -3,6 +3,7 @@ package com.algoritmando.service;
 import com.algoritmando.dto.RespostaDTO;
 import com.algoritmando.dto.ResultadoRequest;
 import com.algoritmando.dto.ResultadoResponse;
+import com.algoritmando.dto.RevisaoResponse;
 import com.algoritmando.model.Pergunta;
 import com.algoritmando.model.Quiz;
 import com.algoritmando.model.Resultado;
@@ -13,8 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -38,6 +41,16 @@ public class ResultadoService {
             throw new ResponseStatusException(
                     BAD_REQUEST,
                     "Quiz não informado"
+            );
+        }
+
+        if (
+                request.nomeUsuario() == null ||
+                        request.nomeUsuario().isBlank()
+        ) {
+            throw new ResponseStatusException(
+                    BAD_REQUEST,
+                    "Nome do usuário não informado"
             );
         }
 
@@ -85,7 +98,8 @@ public class ResultadoService {
 
         validarRespostas(
                 request.respostas(),
-                perguntasPorId.keySet()
+                perguntasPorId.keySet(),
+                perguntas.size()
         );
 
         Map<Long, String> respostasPorPergunta =
@@ -94,11 +108,17 @@ public class ResultadoService {
                         .collect(
                                 Collectors.toMap(
                                         RespostaDTO::perguntaId,
-                                        RespostaDTO::respostaEscolhida
+                                        resposta ->
+                                                resposta
+                                                        .respostaEscolhida()
+                                                        .toUpperCase()
                                 )
                         );
 
         int acertos = 0;
+
+        List<RevisaoResponse> revisao =
+                new ArrayList<>();
 
         for (Pergunta pergunta : perguntas) {
 
@@ -107,16 +127,40 @@ public class ResultadoService {
                             pergunta.getId()
                     );
 
-            if (
-                    respostaEscolhida != null &&
-                            pergunta
-                                    .getRespostaCorreta()
-                                    .equalsIgnoreCase(
-                                            respostaEscolhida
-                                    )
-            ) {
+            String respostaCorreta =
+                    pergunta
+                            .getRespostaCorreta()
+                            .toUpperCase();
+
+            boolean correta =
+                    respostaCorreta.equals(
+                            respostaEscolhida
+                    );
+
+            if (correta) {
                 acertos++;
             }
+
+            revisao.add(
+                    new RevisaoResponse(
+                            pergunta.getId(),
+                            pergunta.getEnunciado(),
+
+                            respostaEscolhida,
+                            obterTextoAlternativa(
+                                    pergunta,
+                                    respostaEscolhida
+                            ),
+
+                            respostaCorreta,
+                            obterTextoAlternativa(
+                                    pergunta,
+                                    respostaCorreta
+                            ),
+
+                            correta
+                    )
+            );
         }
 
         int totalPerguntas =
@@ -155,14 +199,62 @@ public class ResultadoService {
                 quiz.getTitulo(),
                 resultado.getPontuacao(),
                 resultado.getAcertos(),
-                resultado.getTotalPerguntas()
+                resultado.getTotalPerguntas(),
+                revisao
         );
     }
 
     private void validarRespostas(
             List<RespostaDTO> respostas,
-            Set<Long> idsPerguntasDoQuiz
+            Set<Long> idsPerguntasDoQuiz,
+            int totalPerguntas
     ) {
+
+        if (
+                respostas.stream()
+                        .anyMatch(Objects::isNull)
+        ) {
+            throw new ResponseStatusException(
+                    BAD_REQUEST,
+                    "Resposta inválida"
+            );
+        }
+
+        if (
+                respostas.size() !=
+                        totalPerguntas
+        ) {
+            throw new ResponseStatusException(
+                    BAD_REQUEST,
+                    "Todas as perguntas devem ser respondidas"
+            );
+        }
+
+        boolean possuiRespostaInvalida =
+                respostas
+                        .stream()
+                        .anyMatch(
+                                resposta ->
+                                        resposta.perguntaId() == null ||
+                                                resposta.respostaEscolhida() == null ||
+                                                !Set.of(
+                                                        "A",
+                                                        "B",
+                                                        "C",
+                                                        "D"
+                                                ).contains(
+                                                        resposta
+                                                                .respostaEscolhida()
+                                                                .toUpperCase()
+                                                )
+                        );
+
+        if (possuiRespostaInvalida) {
+            throw new ResponseStatusException(
+                    BAD_REQUEST,
+                    "Existe uma resposta inválida"
+            );
+        }
 
         Set<Long> idsRecebidos =
                 respostas
@@ -199,5 +291,30 @@ public class ResultadoService {
                     "Existe uma resposta que não pertence ao quiz selecionado"
             );
         }
+    }
+
+    private String obterTextoAlternativa(
+            Pergunta pergunta,
+            String alternativa
+    ) {
+
+        return switch (
+                alternativa.toUpperCase()
+                ) {
+
+            case "A" ->
+                    pergunta.getAlternativaA();
+
+            case "B" ->
+                    pergunta.getAlternativaB();
+
+            case "C" ->
+                    pergunta.getAlternativaC();
+
+            case "D" ->
+                    pergunta.getAlternativaD();
+
+            default -> "";
+        };
     }
 }

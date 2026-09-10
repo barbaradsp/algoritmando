@@ -1,5 +1,7 @@
 package com.algoritmando.dto;
 
+import java.util.List;
+
 public record ResultadoResponse(
         Long id,
         String nomeUsuario,
@@ -7,6 +9,7 @@ public record ResultadoResponse(
         String quizTitulo,
         int pontuacao,
         int acertos,
-        int totalPerguntas
+        int totalPerguntas,
+        List<RevisaoResponse> revisao
 ) {
 }

@@ -1,0 +1,137 @@
+<div class="container">
+
+  <div
+    class="content"
+    *ngIf="resultado"
+  >
+
+    <div class="cabecalho">
+
+      <h1>
+        📝 Revisão
+      </h1>
+
+      <p class="quiz">
+        {{ resultado.quizTitulo }}
+      </p>
+
+      <p class="resumo">
+
+        Você acertou
+
+        <strong>
+          {{ resultado.acertos }}
+        </strong>
+
+        de
+
+        <strong>
+          {{ resultado.totalPerguntas }}
+        </strong>
+
+        perguntas.
+
+      </p>
+
+    </div>
+
+    <div
+      class="pergunta-card"
+      *ngFor="
+        let item of resultado.revisao;
+        let i = index
+      "
+      [class.acertou]="
+        item.correta
+      "
+      [class.errou]="
+        !item.correta
+      "
+    >
+
+      <div class="pergunta-topo">
+
+        <span class="numero">
+          Pergunta {{ i + 1 }}
+        </span>
+
+        <span
+          class="status correto"
+          *ngIf="item.correta"
+        >
+          ✓ Correta
+        </span>
+
+        <span
+          class="status incorreto"
+          *ngIf="!item.correta"
+        >
+          ✕ Incorreta
+        </span>
+
+      </div>
+
+      <h2>
+        {{ item.enunciado }}
+      </h2>
+
+      <div
+        class="resposta escolhida"
+        [class.resposta-correta]="
+          item.correta
+        "
+        [class.resposta-errada]="
+          !item.correta
+        "
+      >
+
+        <span class="label">
+          Sua resposta
+        </span>
+
+        <strong>
+          {{ item.respostaEscolhida }})
+          {{ item.textoRespostaEscolhida }}
+        </strong>
+
+      </div>
+
+      <div
+        class="resposta correta-resposta"
+        *ngIf="!item.correta"
+      >
+
+        <span class="label">
+          Resposta correta
+        </span>
+
+        <strong>
+          {{ item.respostaCorreta }})
+          {{ item.textoRespostaCorreta }}
+        </strong>
+
+      </div>
+
+    </div>
+
+    <div class="acoes">
+
+      <button
+        class="btn-secundario"
+        (click)="voltarResultado()"
+      >
+        ← Voltar ao resultado
+      </button>
+
+      <button
+        class="btn-principal"
+        (click)="irParaFinal()"
+      >
+        Continuar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

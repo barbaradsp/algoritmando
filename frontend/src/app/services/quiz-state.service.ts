@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { RespostaDTO } from '../models/resultado.model';
+import {
+  RespostaDTO,
+  ResultadoResponse
+} from '../models/resultado.model';
+
 import { Quiz } from '../models/quiz.model';
 
 @Injectable({
@@ -11,43 +15,86 @@ export class QuizStateService {
   nomeUsuario: string = '';
 
   quizId: number | null = null;
+
   quizTitulo: string = '';
 
   respostas: RespostaDTO[] = [];
 
-  selecionarQuiz(quiz: Quiz): void {
+  resultadoAtual:
+    ResultadoResponse | null = null;
 
-    this.quizId = quiz.id;
-    this.quizTitulo = quiz.titulo;
+  selecionarQuiz(
+    quiz: Quiz
+  ): void {
 
-    this.nomeUsuario = '';
-    this.respostas = [];
+    this.quizId =
+      quiz.id;
+
+    this.quizTitulo =
+      quiz.titulo;
+
+    this.nomeUsuario =
+      '';
+
+    this.respostas =
+      [];
+
+    this.resultadoAtual =
+      null;
   }
 
-  iniciarQuiz(nomeUsuario: string): void {
+  iniciarQuiz(
+    nomeUsuario: string
+  ): void {
 
-    this.nomeUsuario = nomeUsuario;
-    this.respostas = [];
+    this.nomeUsuario =
+      nomeUsuario;
+
+    this.respostas =
+      [];
+
+    this.resultadoAtual =
+      null;
   }
 
   adicionarResposta(
     resposta: RespostaDTO
   ): void {
 
-    this.respostas.push(resposta);
+    this.respostas.push(
+      resposta
+    );
+  }
+
+  salvarResultado(
+    resultado: ResultadoResponse
+  ): void {
+
+    this.resultadoAtual =
+      resultado;
   }
 
   limparRespostas(): void {
-    this.respostas = [];
+
+    this.respostas =
+      [];
   }
 
   reset(): void {
 
-    this.nomeUsuario = '';
+    this.nomeUsuario =
+      '';
 
-    this.quizId = null;
-    this.quizTitulo = '';
+    this.quizId =
+      null;
 
-    this.respostas = [];
+    this.quizTitulo =
+      '';
+
+    this.respostas =
+      [];
+
+    this.resultadoAtual =
+      null;
   }
 }
