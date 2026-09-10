@@ -1,31 +1,82 @@
 <div class="container">
-  <div class="card" *ngIf="carregando">
-    <p>Calculando sua pontuação...</p>
+
+  <div
+    class="card"
+    *ngIf="carregando"
+  >
+    <p>
+      Calculando sua pontuação...
+    </p>
   </div>
 
-  <div class="card" *ngIf="erro">
-    <p class="erro">{{ erro }}</p>
+  <div
+    class="card"
+    *ngIf="erro"
+  >
+    <p class="erro">
+      {{ erro }}
+    </p>
   </div>
 
-  <div class="card" *ngIf="!carregando && !erro && resultado">
-    <h2>🏆 Resultado</h2>
+  <div
+    class="card"
+    *ngIf="
+      !carregando &&
+      !erro &&
+      resultado
+    "
+  >
+
+    <h2>
+      🏆 Resultado
+    </h2>
+
+    <p class="quiz-nome">
+      {{ resultado.quizTitulo }}
+    </p>
 
     <div class="pontuacao-destaque">
-      {{ resultado.pontuacao }} pontos
+
+      {{ resultado.pontuacao }}
+      pontos
+
     </div>
 
     <p class="detalhe">
-      Você acertou <strong>{{ resultado.acertos }}</strong> de
-      <strong>{{ resultado.totalPerguntas }}</strong> perguntas
+
+      Você acertou
+
+      <strong>
+        {{ resultado.acertos }}
+      </strong>
+
+      de
+
+      <strong>
+        {{ resultado.totalPerguntas }}
+      </strong>
+
+      perguntas
+
     </p>
 
     <div class="barra-acertos">
+
       <div
         class="barra-fill"
-        [style.width.%]="(resultado.acertos / resultado.totalPerguntas) * 100"
+        [style.width.%]="
+          resultado.pontuacao
+        "
       ></div>
+
     </div>
 
-    <button (click)="irParaFinal()">Continuar</button>
+    <button
+      (click)="irParaFinal()"
+    >
+      Continuar
+    </button>
+
   </div>
+
 </div>

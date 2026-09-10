@@ -67,3 +67,11 @@ button:hover {
   color: #dc2626;
   text-align: center;
 }
+
+.quiz-nome {
+  color: #6366f1;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-top: -12px;
+  margin-bottom: 24px;
+}

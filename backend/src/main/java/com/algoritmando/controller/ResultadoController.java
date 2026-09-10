@@ -18,7 +18,12 @@ public class ResultadoController {
     private final ResultadoService resultadoService;
 
     @PostMapping
-    public ResponseEntity<ResultadoResponse> registrar(@RequestBody ResultadoRequest request) {
-        return ResponseEntity.ok(resultadoService.calcularResultado(request));
+    public ResponseEntity<ResultadoResponse> registrar(
+            @RequestBody ResultadoRequest request
+    ) {
+        return ResponseEntity.ok(
+                resultadoService
+                        .calcularResultado(request)
+        );
     }
 }
