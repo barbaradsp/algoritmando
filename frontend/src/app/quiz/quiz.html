@@ -1,56 +1,123 @@
 <div class="container">
-  <div class="card" *ngIf="carregando">
-    <p>Carregando perguntas...</p>
+
+  <div
+    class="card"
+    *ngIf="carregando"
+  >
+    <p>
+      Carregando perguntas...
+    </p>
   </div>
 
-  <div class="card" *ngIf="erro">
-    <p class="erro">{{ erro }}</p>
+  <div
+    class="card"
+    *ngIf="erro"
+  >
+    <p class="erro">
+      {{ erro }}
+    </p>
   </div>
 
-  <div class="card" *ngIf="!carregando && !erro && perguntaAtual">
+  <div
+    class="card"
+    *ngIf="
+      !carregando &&
+      !erro &&
+      perguntaAtual
+    "
+  >
+
+    <p class="quiz-titulo">
+      {{ quizState.quizTitulo }}
+    </p>
+
     <div class="progress-bar">
-      <div class="progress-fill" [style.width.%]="progresso"></div>
-    </div>
-    <p class="contador">Pergunta {{ indiceAtual + 1 }} de {{ perguntas.length }}</p>
 
-    <h2>{{ perguntaAtual.enunciado }}</h2>
+      <div
+        class="progress-fill"
+        [style.width.%]="progresso"
+      ></div>
+
+    </div>
+
+    <p class="contador">
+
+      Pergunta
+      {{ indiceAtual + 1 }}
+      de
+      {{ perguntas.length }}
+
+    </p>
+
+    <h2>
+      {{ perguntaAtual.enunciado }}
+    </h2>
 
     <div class="alternativas">
+
       <button
         class="alternativa"
-        [class.selecionada]="alternativaSelecionada === 'A'"
+        [class.selecionada]="
+          alternativaSelecionada === 'A'
+        "
         (click)="selecionar('A')"
       >
-        A) {{ perguntaAtual.alternativaA }}
+        A)
+        {{ perguntaAtual.alternativaA }}
       </button>
 
       <button
         class="alternativa"
-        [class.selecionada]="alternativaSelecionada === 'B'"
+        [class.selecionada]="
+          alternativaSelecionada === 'B'
+        "
         (click)="selecionar('B')"
       >
-        B) {{ perguntaAtual.alternativaB }}
+        B)
+        {{ perguntaAtual.alternativaB }}
       </button>
 
       <button
         class="alternativa"
-        [class.selecionada]="alternativaSelecionada === 'C'"
+        [class.selecionada]="
+          alternativaSelecionada === 'C'
+        "
         (click)="selecionar('C')"
       >
-        C) {{ perguntaAtual.alternativaC }}
+        C)
+        {{ perguntaAtual.alternativaC }}
       </button>
 
       <button
         class="alternativa"
-        [class.selecionada]="alternativaSelecionada === 'D'"
+        [class.selecionada]="
+          alternativaSelecionada === 'D'
+        "
         (click)="selecionar('D')"
       >
-        D) {{ perguntaAtual.alternativaD }}
+        D)
+        {{ perguntaAtual.alternativaD }}
       </button>
+
     </div>
 
-    <button class="btn-proxima" [disabled]="!alternativaSelecionada" (click)="proxima()">
-      {{ indiceAtual < perguntas.length - 1 ? 'Próxima' : 'Finalizar' }}
+    <button
+      class="btn-proxima"
+      [disabled]="
+        !alternativaSelecionada
+      "
+      (click)="proxima()"
+    >
+
+      {{
+        indiceAtual <
+        perguntas.length - 1
+          ? 'Próxima'
+          : 'Finalizar'
+      }}
+
     </button>
+
   </div>
+
 </div>

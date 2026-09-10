@@ -1,4 +1,12 @@
 package com.algoritmando.dto;
 
-public record ResultadoResponse(Long id, String nomeUsuario, int pontuacao, int acertos, int totalPerguntas) {
+public record ResultadoResponse(
+        Long id,
+        String nomeUsuario,
+        Long quizId,
+        String quizTitulo,
+        int pontuacao,
+        int acertos,
+        int totalPerguntas
+) {
 }

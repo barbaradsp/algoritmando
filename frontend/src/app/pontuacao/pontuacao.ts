@@ -1,13 +1,17 @@
 import {
+  ChangeDetectorRef,
   Component,
-  OnInit,
-  ChangeDetectorRef
+  OnInit
 } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
 import { ApiService } from '../services/api.service';
 import { QuizStateService } from '../services/quiz-state.service';
-import { ResultadoResponse } from '../models/resultado.model';
+import {
+  ResultadoResponse
+} from '../models/resultado.model';
 
 @Component({
   selector: 'app-pontuacao',
@@ -17,8 +21,12 @@ import { ResultadoResponse } from '../models/resultado.model';
   styleUrl: './pontuacao.css'
 })
 export class Pontuacao implements OnInit {
-  resultado: ResultadoResponse | null = null;
+
+  resultado:
+    ResultadoResponse | null = null;
+
   carregando: boolean = true;
+
   erro: string = '';
 
   constructor(
@@ -29,33 +37,65 @@ export class Pontuacao implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Se não tem respostas registradas, o usuário pulou o fluxo
-    if (!this.quizState.nomeUsuario || this.quizState.respostas.length === 0) {
+
+    if (
+      !this.quizState.nomeUsuario ||
+      !this.quizState.quizId ||
+      this.quizState.respostas.length === 0
+    ) {
+
       this.router.navigate(['/']);
+
       return;
     }
 
     this.api.enviarResultado({
-      nomeUsuario: this.quizState.nomeUsuario,
-      respostas: this.quizState.respostas
-    }).subscribe({
-        next: (resultado) => {
-          this.resultado = resultado;
-          this.carregando = false;
 
-          this.cdr.detectChanges();
-        },
+      nomeUsuario:
+      this.quizState.nomeUsuario,
+
+      quizId:
+      this.quizState.quizId,
+
+      respostas:
+      this.quizState.respostas
+
+    }).subscribe({
+
+      next: (resultado) => {
+
+        this.resultado =
+          resultado;
+
+        this.carregando =
+          false;
+
+        this.cdr.detectChanges();
+      },
+
       error: (err) => {
-        this.erro = 'Erro ao calcular resultado. Verifique se o backend está rodando.';
-        this.carregando = false;
-        console.error(err);
+
+        console.error(
+          'Erro ao calcular resultado:',
+          err
+        );
+
+        this.erro =
+          'Erro ao calcular resultado.';
+
+        this.carregando =
+          false;
 
         this.cdr.detectChanges();
       }
+
     });
   }
 
   irParaFinal(): void {
-    this.router.navigate(['/final']);
+
+    this.router.navigate([
+      '/final'
+    ]);
   }
 }
