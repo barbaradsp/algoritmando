@@ -11,6 +11,9 @@ backend/target/
 # backend/mvnw
 # backend/mvnw.cmd
 
+# Local H2 database
+backend/data/
+
 
 # =========================
 # FRONTEND - Angular / Node
