@@ -3,6 +3,7 @@ package com.algoritmando.controller;
 import com.algoritmando.dto.UsuarioRequest;
 import com.algoritmando.dto.UsuarioResponse;
 import com.algoritmando.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +20,12 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<UsuarioResponse> cadastrar(
-            @RequestBody UsuarioRequest request
+            @Valid
+            @RequestBody
+            UsuarioRequest request
     ) {
-
         return ResponseEntity.ok(
-                usuarioService
-                        .cadastrarOuBuscar(request)
+                usuarioService.cadastrarOuBuscar(request)
         );
     }
 }

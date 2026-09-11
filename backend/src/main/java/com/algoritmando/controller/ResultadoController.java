@@ -5,6 +5,7 @@ import com.algoritmando.dto.ResultadoRequest;
 import com.algoritmando.dto.ResultadoResponse;
 import com.algoritmando.service.ResultadoService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -27,14 +28,13 @@ public class ResultadoController {
 
     @PostMapping
     public ResponseEntity<ResultadoResponse> registrar(
-            @RequestBody ResultadoRequest request
+            @Valid
+            @RequestBody
+            ResultadoRequest request
     ) {
 
         return ResponseEntity.ok(
-                resultadoService
-                        .calcularResultado(
-                                request
-                        )
+                resultadoService.calcularResultado(request)
         );
     }
 
