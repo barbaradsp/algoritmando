@@ -4,10 +4,17 @@ import {
   OnInit
 } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import {
+  CommonModule
+} from '@angular/common';
 
-import { ApiService } from '../services/api.service';
+import {
+  Router
+} from '@angular/router';
+
+import {
+  ApiService
+} from '../services/api.service';
 
 import {
   QuizStateService
@@ -17,14 +24,21 @@ import {
   ResultadoResponse
 } from '../models/resultado.model';
 
+
 @Component({
   selector: 'app-pontuacao',
+
   standalone: true,
+
   imports: [
     CommonModule
   ],
-  templateUrl: './pontuacao.html',
-  styleUrl: './pontuacao.css'
+
+  templateUrl:
+    './pontuacao.html',
+
+  styleUrl:
+    './pontuacao.css'
 })
 export class Pontuacao
   implements OnInit {
@@ -38,20 +52,26 @@ export class Pontuacao
   erro:
     string = '';
 
+
   constructor(
-    private api: ApiService,
-    private quizState: QuizStateService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
+
+    private api:
+    ApiService,
+
+    private quizState:
+    QuizStateService,
+
+    private router:
+    Router,
+
+    private cdr:
+    ChangeDetectorRef
+
   ) {}
+
 
   ngOnInit(): void {
 
-    /*
-     * Caso esteja voltando da tela
-     * de revisão, não calcula e não
-     * salva o resultado novamente.
-     */
     if (
       this.quizState.resultadoAtual
     ) {
@@ -65,8 +85,9 @@ export class Pontuacao
       return;
     }
 
+
     if (
-      !this.quizState.nomeUsuario ||
+      !this.quizState.usuarioId ||
       !this.quizState.quizId ||
       this.quizState.respostas.length === 0
     ) {
@@ -78,59 +99,64 @@ export class Pontuacao
       return;
     }
 
-    this.api.enviarResultado({
 
-      nomeUsuario:
-      this.quizState.nomeUsuario,
+    this.api
+      .enviarResultado({
 
-      quizId:
-      this.quizState.quizId,
+        usuarioId:
+        this.quizState.usuarioId,
 
-      respostas:
-      this.quizState.respostas
+        quizId:
+        this.quizState.quizId,
 
-    }).subscribe({
+        respostas:
+        this.quizState.respostas
 
-      next: (
-        resultado
-      ) => {
+      })
+      .subscribe({
 
-        this.resultado =
-          resultado;
+        next: (
+          resultado
+        ) => {
 
-        this.quizState
-          .salvarResultado(
-            resultado
+          this.resultado =
+            resultado;
+
+          this.quizState
+            .salvarResultado(
+              resultado
+            );
+
+          this.carregando =
+            false;
+
+          this.cdr
+            .detectChanges();
+        },
+
+
+        error: (
+          err
+        ) => {
+
+          console.error(
+            'Erro ao calcular resultado:',
+            err
           );
 
-        this.carregando =
-          false;
+          this.erro =
+            'Erro ao calcular resultado.';
 
-        this.cdr
-          .detectChanges();
-      },
+          this.carregando =
+            false;
 
-      error: (
-        err
-      ) => {
+          this.cdr
+            .detectChanges();
+        }
 
-        console.error(
-          'Erro ao calcular resultado:',
-          err
-        );
-
-        this.erro =
-          'Erro ao calcular resultado.';
-
-        this.carregando =
-          false;
-
-        this.cdr
-          .detectChanges();
-      }
-
-    });
+      });
   }
+
 
   revisarRespostas(): void {
 
@@ -138,6 +164,15 @@ export class Pontuacao
       '/revisao'
     ]);
   }
+
+
+  verHistorico(): void {
+
+    this.router.navigate([
+      '/historico'
+    ]);
+  }
+
 
   irParaFinal(): void {
 

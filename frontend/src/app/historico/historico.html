@@ -1,0 +1,187 @@
+<div class="container">
+
+  <div class="content">
+
+    <div class="cabecalho">
+
+      <h1>
+        📊 Histórico
+      </h1>
+
+      <p>
+        Tentativas de
+        <strong>
+          {{ quizState.nomeUsuario }}
+        </strong>
+      </p>
+
+    </div>
+
+
+    <div
+      class="status-card"
+      *ngIf="carregando"
+    >
+
+      Carregando histórico...
+
+    </div>
+
+
+    <div
+      class="status-card erro"
+      *ngIf="erro"
+    >
+
+      {{ erro }}
+
+    </div>
+
+
+    <div
+      class="status-card"
+      *ngIf="
+        !carregando &&
+        !erro &&
+        resultados.length === 0
+      "
+    >
+
+      Você ainda não possui
+      tentativas registradas.
+
+    </div>
+
+
+    <div
+      class="lista"
+      *ngIf="
+        !carregando &&
+        !erro &&
+        resultados.length > 0
+      "
+    >
+
+      <div
+        class="resultado-card"
+        *ngFor="
+          let resultado of resultados
+        "
+      >
+
+        <div class="topo">
+
+          <div>
+
+            <span class="categoria">
+
+              {{
+                formatarCategoria(
+                  resultado.categoria
+                )
+              }}
+
+            </span>
+
+            <h2>
+              {{ resultado.quizTitulo }}
+            </h2>
+
+          </div>
+
+
+          <div class="pontuacao">
+
+            {{ resultado.pontuacao }}
+
+            <span>
+              pts
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="informacoes">
+
+          <span>
+
+            ✅
+
+            {{ resultado.acertos }}
+
+            de
+
+            {{ resultado.totalPerguntas }}
+
+          </span>
+
+
+          <span>
+
+            {{
+              formatarDificuldade(
+                resultado.dificuldade
+              )
+            }}
+
+          </span>
+
+
+          <span>
+
+            🕒
+
+            {{
+              formatarData(
+                resultado.dataRealizacao
+              )
+            }}
+
+          </span>
+
+        </div>
+
+
+        <div class="barra">
+
+          <div
+            class="barra-fill"
+            [style.width.%]="
+              resultado.pontuacao
+            "
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="acoes"
+      *ngIf="!carregando"
+    >
+
+      <button
+        class="btn-secundario"
+        (click)="voltarResultado()"
+      >
+        ← Resultado
+      </button>
+
+
+      <button
+        class="btn-principal"
+        (click)="irParaFinal()"
+      >
+        Continuar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

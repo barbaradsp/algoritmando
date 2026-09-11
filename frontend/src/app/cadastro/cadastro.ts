@@ -3,56 +3,104 @@ import {
   Component
 } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  CommonModule
+} from '@angular/common';
 
-import { ApiService } from '../services/api.service';
-import { QuizStateService } from '../services/quiz-state.service';
+import {
+  FormsModule
+} from '@angular/forms';
+
+import {
+  Router
+} from '@angular/router';
+
+import {
+  ApiService
+} from '../services/api.service';
+
+import {
+  QuizStateService
+} from '../services/quiz-state.service';
+
 
 @Component({
   selector: 'app-cadastro',
+
   standalone: true,
+
   imports: [
     CommonModule,
     FormsModule
   ],
-  templateUrl: './cadastro.html',
-  styleUrl: './cadastro.css'
+
+  templateUrl:
+    './cadastro.html',
+
+  styleUrl:
+    './cadastro.css'
 })
 export class Cadastro {
 
-  nome: string = '';
-  email: string = '';
+  nome:
+    string = '';
 
-  carregando: boolean = false;
-  erro: string = '';
+  email:
+    string = '';
+
+  carregando:
+    boolean = false;
+
+  erro:
+    string = '';
+
 
   constructor(
-    private api: ApiService,
-    public quizState: QuizStateService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
+
+    private api:
+    ApiService,
+
+    public quizState:
+    QuizStateService,
+
+    private router:
+    Router,
+
+    private cdr:
+    ChangeDetectorRef
+
   ) {}
+
 
   cadastrar(): void {
 
     if (
       !this.quizState.quizId
     ) {
-      this.router.navigate(['/']);
+
+      this.router.navigate([
+        '/'
+      ]);
+
       return;
     }
+
 
     if (
       !this.nome ||
       !this.email
     ) {
+
       return;
     }
 
-    this.carregando = true;
-    this.erro = '';
+
+    this.carregando =
+      true;
+
+    this.erro =
+      '';
+
 
     this.api
       .cadastrarUsuario(
@@ -61,21 +109,27 @@ export class Cadastro {
       )
       .subscribe({
 
-        next: () => {
+        next: (
+          usuario
+        ) => {
 
           this.quizState
             .iniciarQuiz(
-              this.nome
+              usuario
             );
 
-          this.carregando = false;
+          this.carregando =
+            false;
 
           this.router.navigate([
             '/quiz'
           ]);
         },
 
-        error: (err) => {
+
+        error: (
+          err
+        ) => {
 
           console.error(
             'Erro ao cadastrar usuário:',
@@ -83,11 +137,13 @@ export class Cadastro {
           );
 
           this.erro =
-            'Erro ao cadastrar. Verifique se o backend está rodando.';
+            'Erro ao cadastrar usuário.';
 
-          this.carregando = false;
+          this.carregando =
+            false;
 
-          this.cdr.detectChanges();
+          this.cdr
+            .detectChanges();
         }
 
       });
