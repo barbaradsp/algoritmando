@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 
 import { Pergunta } from '../models/pergunta.model';
 import { Quiz } from '../models/quiz.model';
+import { UsuarioResponse } from '../models/usuario.model';
 import {
+  HistoricoResultado,
   ResultadoRequest,
   ResultadoResponse
 } from '../models/resultado.model';
@@ -14,16 +16,19 @@ import {
 })
 export class ApiService {
 
-  private baseUrl = 'http://localhost:8080/api';
+  private baseUrl =
+    'http://localhost:8080/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+  ) {}
 
   cadastrarUsuario(
     nome: string,
     email: string
-  ): Observable<any> {
+  ): Observable<UsuarioResponse> {
 
-    return this.http.post(
+    return this.http.post<UsuarioResponse>(
       `${this.baseUrl}/usuarios`,
       {
         nome,
@@ -32,7 +37,8 @@ export class ApiService {
     );
   }
 
-  listarQuizzes(): Observable<Quiz[]> {
+  listarQuizzes():
+    Observable<Quiz[]> {
 
     return this.http.get<Quiz[]>(
       `${this.baseUrl}/quizzes`
@@ -55,6 +61,22 @@ export class ApiService {
     return this.http.post<ResultadoResponse>(
       `${this.baseUrl}/resultados`,
       request
+    );
+  }
+
+  listarHistorico(
+    email: string
+  ): Observable<HistoricoResultado[]> {
+
+    return this.http.get<
+      HistoricoResultado[]
+    >(
+      `${this.baseUrl}/resultados/historico`,
+      {
+        params: {
+          email
+        }
+      }
     );
   }
 }

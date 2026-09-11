@@ -1,0 +1,265 @@
+.container {
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #8b5cf6
+    );
+
+  padding:
+    50px 20px;
+
+  font-family:
+    'Segoe UI',
+    sans-serif;
+}
+
+
+.content {
+  width: 100%;
+
+  max-width: 850px;
+
+  margin: 0 auto;
+}
+
+
+.cabecalho {
+  color: white;
+
+  text-align: center;
+
+  margin-bottom: 32px;
+}
+
+
+.cabecalho h1 {
+  font-size: 2.4rem;
+
+  margin-bottom: 8px;
+}
+
+
+.cabecalho p {
+  margin: 0;
+
+  font-size: 1.05rem;
+}
+
+
+.lista {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+
+.resultado-card {
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.15);
+}
+
+
+.topo {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+.categoria {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  background: #eef2ff;
+
+  color: #6366f1;
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+
+  margin-bottom: 8px;
+}
+
+
+.resultado-card h2 {
+  color: #1f2937;
+
+  font-size: 1.25rem;
+
+  margin: 0;
+}
+
+
+.pontuacao {
+  color: #6366f1;
+
+  font-size: 2rem;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+.pontuacao span {
+  font-size: 0.8rem;
+
+  font-weight: 600;
+}
+
+
+.informacoes {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 18px;
+
+  color: #6b7280;
+
+  font-size: 0.9rem;
+
+  margin-top: 20px;
+}
+
+
+.barra {
+  width: 100%;
+
+  height: 9px;
+
+  background: #e5e7eb;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  margin-top: 18px;
+}
+
+
+.barra-fill {
+  height: 100%;
+
+  background: #22c55e;
+
+  border-radius: 999px;
+}
+
+
+.status-card {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  color: #374151;
+}
+
+
+.status-card.erro {
+  color: #dc2626;
+}
+
+
+.acoes {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  margin-top: 30px;
+}
+
+
+.acoes button {
+  min-width: 160px;
+
+  padding: 13px 20px;
+
+  border-radius: 9px;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+}
+
+
+.btn-principal {
+  border: none;
+
+  background: white;
+
+  color: #6366f1;
+
+  font-weight: 600;
+}
+
+
+.btn-secundario {
+  background: transparent;
+
+  border: 1px solid white;
+
+  color: white;
+}
+
+
+@media (
+max-width: 600px
+) {
+
+  .container {
+    padding:
+      30px 14px;
+  }
+
+
+  .topo {
+    align-items:
+      flex-start;
+  }
+
+
+  .informacoes {
+    flex-direction:
+      column;
+
+    gap: 8px;
+  }
+
+
+  .acoes {
+    flex-direction:
+      column;
+  }
+
+
+  .acoes button {
+    width: 100%;
+  }
+}

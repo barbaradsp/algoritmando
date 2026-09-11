@@ -4,6 +4,7 @@ import { Cadastro } from './cadastro/cadastro';
 import { Quiz } from './quiz/quiz';
 import { Pontuacao } from './pontuacao/pontuacao';
 import { Revisao } from './revisao/revisao';
+import { Historico } from './historico/historico';
 import { Final } from './final/final';
 
 export const routes: Routes = [
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'quiz', component: Quiz },
   { path: 'pontuacao', component: Pontuacao },
   { path: 'revisao', component: Revisao },
+  { path: 'historico', component: Historico },
   { path: 'final', component: Final }
 ];
 

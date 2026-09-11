@@ -1,27 +1,50 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable
+} from '@angular/core';
 
 import {
   RespostaDTO,
   ResultadoResponse
 } from '../models/resultado.model';
 
-import { Quiz } from '../models/quiz.model';
+import {
+  Quiz
+} from '../models/quiz.model';
+
+import {
+  UsuarioResponse
+} from '../models/usuario.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizStateService {
 
-  nomeUsuario: string = '';
+  usuarioId:
+    number | null = null;
 
-  quizId: number | null = null;
+  nomeUsuario:
+    string = '';
 
-  quizTitulo: string = '';
+  emailUsuario:
+    string = '';
 
-  respostas: RespostaDTO[] = [];
+
+  quizId:
+    number | null = null;
+
+  quizTitulo:
+    string = '';
+
+
+  respostas:
+    RespostaDTO[] = [];
+
 
   resultadoAtual:
     ResultadoResponse | null = null;
+
 
   selecionarQuiz(
     quiz: Quiz
@@ -33,7 +56,13 @@ export class QuizStateService {
     this.quizTitulo =
       quiz.titulo;
 
+    this.usuarioId =
+      null;
+
     this.nomeUsuario =
+      '';
+
+    this.emailUsuario =
       '';
 
     this.respostas =
@@ -43,12 +72,19 @@ export class QuizStateService {
       null;
   }
 
+
   iniciarQuiz(
-    nomeUsuario: string
+    usuario: UsuarioResponse
   ): void {
 
+    this.usuarioId =
+      usuario.id;
+
     this.nomeUsuario =
-      nomeUsuario;
+      usuario.nome;
+
+    this.emailUsuario =
+      usuario.email;
 
     this.respostas =
       [];
@@ -56,6 +92,7 @@ export class QuizStateService {
     this.resultadoAtual =
       null;
   }
+
 
   adicionarResposta(
     resposta: RespostaDTO
@@ -66,6 +103,7 @@ export class QuizStateService {
     );
   }
 
+
   salvarResultado(
     resultado: ResultadoResponse
   ): void {
@@ -74,15 +112,23 @@ export class QuizStateService {
       resultado;
   }
 
+
   limparRespostas(): void {
 
     this.respostas =
       [];
   }
 
+
   reset(): void {
 
+    this.usuarioId =
+      null;
+
     this.nomeUsuario =
+      '';
+
+    this.emailUsuario =
       '';
 
     this.quizId =
