@@ -13,6 +13,10 @@ import {
 } from '@angular/router';
 
 import {
+  forkJoin
+} from 'rxjs';
+
+import {
   ApiService
 } from '../services/api.service';
 
@@ -21,6 +25,7 @@ import {
 } from '../services/quiz-state.service';
 
 import {
+  DesempenhoUsuario,
   HistoricoResultado
 } from '../models/resultado.model';
 
@@ -45,6 +50,9 @@ export class Historico
 
   resultados:
     HistoricoResultado[] = [];
+
+  desempenho:
+    DesempenhoUsuario | null = null;
 
   carregando:
     boolean = true;
@@ -84,18 +92,30 @@ export class Historico
     }
 
 
-    this.api
-      .listarHistorico(
-        this.quizState.emailUsuario
-      )
+    forkJoin({
+
+      historico:
+        this.api.listarHistorico(
+          this.quizState.emailUsuario
+        ),
+
+      desempenho:
+        this.api.obterDesempenho(
+          this.quizState.emailUsuario
+        )
+
+    })
       .subscribe({
 
         next: (
-          resultados
+          resposta
         ) => {
 
           this.resultados =
-            resultados;
+            resposta.historico;
+
+          this.desempenho =
+            resposta.desempenho;
 
           this.carregando =
             false;

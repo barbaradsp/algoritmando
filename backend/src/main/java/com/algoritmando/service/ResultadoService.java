@@ -578,4 +578,103 @@ public class ResultadoService {
 
         return ranking;
     }
+
+    @Transactional(readOnly = true)
+    public DesempenhoResponse obterDesempenho(
+            String email
+    ) {
+
+        if (
+                email == null ||
+                        email.isBlank()
+        ) {
+
+            throw new ResponseStatusException(
+                    BAD_REQUEST,
+                    "E-mail não informado"
+            );
+        }
+
+
+        Usuario usuario =
+                usuarioRepository
+                        .findByEmailIgnoreCase(
+                                email.trim()
+                        )
+                        .orElseThrow(() ->
+                                new ResponseStatusException(
+                                        NOT_FOUND,
+                                        "Usuário não encontrado"
+                                )
+                        );
+
+
+        List<Resultado> resultados =
+                resultadoRepository
+                        .findByUsuario_IdOrderByDataRealizacaoDesc(
+                                usuario.getId()
+                        );
+
+
+        if (resultados.isEmpty()) {
+
+            return new DesempenhoResponse(
+                    0,
+                    0,
+                    0,
+                    0
+            );
+        }
+
+
+        int totalTentativas =
+                resultados.size();
+
+
+        long quizzesRealizados =
+                resultados
+                        .stream()
+                        .map(
+                                resultado ->
+                                        resultado
+                                                .getQuiz()
+                                                .getId()
+                        )
+                        .distinct()
+                        .count();
+
+
+        int mediaPontuacao =
+                (int) Math.round(
+                        resultados
+                                .stream()
+                                .mapToInt(
+                                        Resultado::getPontuacao
+                                )
+                                .average()
+                                .orElse(0)
+                );
+
+
+        int melhorPontuacao =
+                resultados
+                        .stream()
+                        .mapToInt(
+                                Resultado::getPontuacao
+                        )
+                        .max()
+                        .orElse(0);
+
+
+        return new DesempenhoResponse(
+
+                totalTentativas,
+
+                quizzesRealizados,
+
+                mediaPontuacao,
+
+                melhorPontuacao
+        );
+    }
 }

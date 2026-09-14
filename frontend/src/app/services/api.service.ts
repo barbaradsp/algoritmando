@@ -8,7 +8,8 @@ import { UsuarioResponse } from '../models/usuario.model';
 import {
   HistoricoResultado,
   ResultadoRequest,
-  ResultadoResponse
+  ResultadoResponse,
+  DesempenhoUsuario
 } from '../models/resultado.model';
 import { RankingResultado } from '../models/ranking.model';
 
@@ -89,6 +90,22 @@ export class ApiService {
       RankingResultado[]
     >(
       `${this.baseUrl}/quizzes/${quizId}/ranking`
+    );
+  }
+
+  obterDesempenho(
+    email: string
+  ): Observable<DesempenhoUsuario> {
+
+    return this.http.get<
+      DesempenhoUsuario
+    >(
+      `${this.baseUrl}/resultados/desempenho`,
+      {
+        params: {
+          email
+        }
+      }
     );
   }
 }
