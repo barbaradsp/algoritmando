@@ -1,0 +1,134 @@
+<div class="pagina-ranking">
+
+  <main class="ranking-container">
+
+    <header class="cabecalho">
+
+      <div class="trofeu">
+        🏆
+      </div>
+
+      <h1>
+        Ranking
+      </h1>
+
+      <p>
+        {{ quizState.quizTitulo }}
+      </p>
+
+    </header>
+
+
+    <div
+      *ngIf="carregando"
+      class="mensagem"
+    >
+      Carregando ranking...
+    </div>
+
+
+    <div
+      *ngIf="erro"
+      class="mensagem erro"
+    >
+      {{ erro }}
+    </div>
+
+
+    <div
+      *ngIf="
+        !carregando &&
+        !erro &&
+        ranking.length === 0
+      "
+      class="mensagem"
+    >
+      Ainda não existem resultados para este quiz.
+    </div>
+
+
+    <section
+      *ngIf="
+        !carregando &&
+        !erro &&
+        ranking.length > 0
+      "
+      class="lista-ranking"
+    >
+
+      <article
+        *ngFor="let resultado of ranking"
+        class="ranking-item"
+        [class.usuario-atual]="
+          ehUsuarioAtual(resultado)
+        "
+      >
+
+        <div class="posicao">
+
+          {{
+            exibirPosicao(
+              resultado.posicao
+            )
+          }}
+
+        </div>
+
+
+        <div class="usuario">
+
+          <div class="nome">
+
+            {{ resultado.nomeUsuario }}
+
+            <span
+              *ngIf="
+                ehUsuarioAtual(resultado)
+              "
+              class="voce"
+            >
+              Você
+            </span>
+
+          </div>
+
+
+          <div class="acertos">
+
+            {{ resultado.acertos }}
+            de
+            {{ resultado.totalPerguntas }}
+            acertos
+
+          </div>
+
+        </div>
+
+
+        <div class="pontuacao">
+
+          <strong>
+            {{ resultado.pontuacao }}
+          </strong>
+
+          <span>
+            pts
+          </span>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <button
+      class="btn-voltar"
+      (click)="voltarResultado()"
+    >
+      Voltar ao resultado
+    </button>
+
+  </main>
+
+</div>

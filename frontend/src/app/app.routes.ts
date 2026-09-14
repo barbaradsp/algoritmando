@@ -6,6 +6,7 @@ import { Pontuacao } from './pontuacao/pontuacao';
 import { Revisao } from './revisao/revisao';
 import { Historico } from './historico/historico';
 import { Final } from './final/final';
+import { Ranking } from './ranking/ranking';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -14,6 +15,7 @@ export const routes: Routes = [
   { path: 'pontuacao', component: Pontuacao },
   { path: 'revisao', component: Revisao },
   { path: 'historico', component: Historico },
+  { path: 'ranking', component: Ranking },
   { path: 'final', component: Final }
 ];
 

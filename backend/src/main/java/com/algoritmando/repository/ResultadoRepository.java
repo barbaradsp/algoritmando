@@ -12,4 +12,10 @@ public interface ResultadoRepository
     findByUsuario_IdOrderByDataRealizacaoDesc(
             Long usuarioId
     );
+
+
+    List<Resultado>
+    findByQuiz_IdOrderByPontuacaoDescAcertosDescDataRealizacaoAsc(
+            Long quizId
+    );
 }

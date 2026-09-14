@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -490,5 +492,90 @@ public class ResultadoService {
             default ->
                     "";
         };
+    }
+
+    @Transactional(readOnly = true)
+    public List<RankingResponse> listarRanking(
+            Long quizId
+    ) {
+
+        if (quizId == null) {
+
+            throw new ResponseStatusException(
+                    BAD_REQUEST,
+                    "Quiz não informado"
+            );
+        }
+
+        quizRepository
+                .findById(quizId)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                NOT_FOUND,
+                                "Quiz não encontrado"
+                        )
+                );
+
+        List<Resultado> resultados =
+                resultadoRepository
+                        .findByQuiz_IdOrderByPontuacaoDescAcertosDescDataRealizacaoAsc(
+                                quizId
+                        );
+
+        Set<Long> usuariosAdicionados =
+                new HashSet<>();
+
+        List<RankingResponse> ranking =
+                new ArrayList<>();
+
+        int posicao = 1;
+
+        for (Resultado resultado : resultados) {
+
+            Long usuarioId =
+                    resultado
+                            .getUsuario()
+                            .getId();
+
+            if (
+                    usuariosAdicionados.add(
+                            usuarioId
+                    )
+            ) {
+
+                ranking.add(
+                        new RankingResponse(
+
+                                posicao,
+
+                                usuarioId,
+
+                                resultado
+                                        .getUsuario()
+                                        .getNome(),
+
+                                resultado
+                                        .getPontuacao(),
+
+                                resultado
+                                        .getAcertos(),
+
+                                resultado
+                                        .getTotalPerguntas(),
+
+                                resultado
+                                        .getDataRealizacao()
+                        )
+                );
+
+                posicao++;
+
+                if (ranking.size() == 10) {
+                    break;
+                }
+            }
+        }
+
+        return ranking;
     }
 }

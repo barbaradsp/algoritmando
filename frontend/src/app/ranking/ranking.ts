@@ -21,12 +21,11 @@ import {
 } from '../services/quiz-state.service';
 
 import {
-  ResultadoResponse
-} from '../models/resultado.model';
-
+  RankingResultado
+} from '../models/ranking.model';
 
 @Component({
-  selector: 'app-pontuacao',
+  selector: 'app-ranking',
 
   standalone: true,
 
@@ -35,16 +34,16 @@ import {
   ],
 
   templateUrl:
-    './pontuacao.html',
+    './ranking.html',
 
   styleUrl:
-    './pontuacao.css'
+    './ranking.css'
 })
-export class Pontuacao
+export class Ranking
   implements OnInit {
 
-  resultado:
-    ResultadoResponse | null = null;
+  ranking:
+    RankingResultado[] = [];
 
   carregando:
     boolean = true;
@@ -52,13 +51,12 @@ export class Pontuacao
   erro:
     string = '';
 
-
   constructor(
 
     private api:
     ApiService,
 
-    private quizState:
+    public quizState:
     QuizStateService,
 
     private router:
@@ -69,27 +67,10 @@ export class Pontuacao
 
   ) {}
 
-
   ngOnInit(): void {
 
     if (
-      this.quizState.resultadoAtual
-    ) {
-
-      this.resultado =
-        this.quizState.resultadoAtual;
-
-      this.carregando =
-        false;
-
-      return;
-    }
-
-
-    if (
-      !this.quizState.usuarioId ||
-      !this.quizState.quizId ||
-      this.quizState.respostas.length === 0
+      !this.quizState.quizId
     ) {
 
       this.router.navigate([
@@ -99,33 +80,18 @@ export class Pontuacao
       return;
     }
 
-
     this.api
-      .enviarResultado({
-
-        usuarioId:
-        this.quizState.usuarioId,
-
-        quizId:
-        this.quizState.quizId,
-
-        respostas:
-        this.quizState.respostas
-
-      })
+      .listarRanking(
+        this.quizState.quizId
+      )
       .subscribe({
 
         next: (
-          resultado
+          ranking
         ) => {
 
-          this.resultado =
-            resultado;
-
-          this.quizState
-            .salvarResultado(
-              resultado
-            );
+          this.ranking =
+            ranking;
 
           this.carregando =
             false;
@@ -134,18 +100,17 @@ export class Pontuacao
             .detectChanges();
         },
 
-
         error: (
           err
         ) => {
 
           console.error(
-            'Erro ao calcular resultado:',
+            'Erro ao carregar ranking:',
             err
           );
 
           this.erro =
-            'Erro ao calcular resultado.';
+            'Não foi possível carregar o ranking.';
 
           this.carregando =
             false;
@@ -157,33 +122,40 @@ export class Pontuacao
       });
   }
 
+  ehUsuarioAtual(
+    resultado: RankingResultado
+  ): boolean {
 
-  revisarRespostas(): void {
-
-    this.router.navigate([
-      '/revisao'
-    ]);
+    return (
+      resultado.usuarioId ===
+      this.quizState.usuarioId
+    );
   }
 
+  exibirPosicao(
+    posicao: number
+  ): string {
 
-  verHistorico(): void {
+    switch (posicao) {
 
-    this.router.navigate([
-      '/historico'
-    ]);
+      case 1:
+        return '🥇';
+
+      case 2:
+        return '🥈';
+
+      case 3:
+        return '🥉';
+
+      default:
+        return `${posicao}º`;
+    }
   }
 
-  verRanking(): void {
+  voltarResultado(): void {
 
     this.router.navigate([
-      '/ranking'
-    ]);
-  }
-
-  irParaFinal(): void {
-
-    this.router.navigate([
-      '/final'
+      '/pontuacao'
     ]);
   }
 }
