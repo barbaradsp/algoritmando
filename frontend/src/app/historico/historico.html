@@ -1,8 +1,8 @@
 <div class="container">
 
-  <div class="content">
+  <main class="conteudo">
 
-    <div class="cabecalho">
+    <header class="cabecalho">
 
       <h1>
         📊 Histórico
@@ -15,61 +15,123 @@
         </strong>
       </p>
 
-    </div>
+    </header>
 
 
     <div
-      class="status-card"
       *ngIf="carregando"
+      class="mensagem"
     >
-
       Carregando histórico...
-
     </div>
 
 
     <div
-      class="status-card erro"
       *ngIf="erro"
+      class="mensagem erro"
+    >
+      {{ erro }}
+    </div>
+
+
+    <!-- RESUMO -->
+
+    <section
+      *ngIf="
+        !carregando &&
+        !erro &&
+        desempenho
+      "
+      class="resumo"
     >
 
-      {{ erro }}
+      <article class="resumo-card">
 
-    </div>
+        <strong>
+          {{ desempenho.totalTentativas }}
+        </strong>
 
+        <span>
+          Tentativas
+        </span>
+
+      </article>
+
+
+      <article class="resumo-card">
+
+        <strong>
+          {{ desempenho.quizzesRealizados }}
+        </strong>
+
+        <span>
+          Quizzes
+        </span>
+
+      </article>
+
+
+      <article class="resumo-card">
+
+        <strong>
+          {{ desempenho.mediaPontuacao }}
+        </strong>
+
+        <span>
+          Média de pontos
+        </span>
+
+      </article>
+
+
+      <article class="resumo-card destaque">
+
+        <strong>
+          {{ desempenho.melhorPontuacao }}
+        </strong>
+
+        <span>
+          Melhor pontuação
+        </span>
+
+      </article>
+
+    </section>
+
+
+    <!-- HISTÓRICO VAZIO -->
 
     <div
-      class="status-card"
       *ngIf="
         !carregando &&
         !erro &&
         resultados.length === 0
       "
+      class="mensagem"
     >
-
-      Você ainda não possui
-      tentativas registradas.
-
+      Você ainda não possui tentativas.
     </div>
 
 
-    <div
-      class="lista"
+    <!-- TENTATIVAS -->
+
+    <section
       *ngIf="
         !carregando &&
         !erro &&
         resultados.length > 0
       "
+      class="lista"
     >
 
-      <div
-        class="resultado-card"
+      <article
         *ngFor="
           let resultado of resultados
         "
+        class="tentativa"
       >
 
-        <div class="topo">
+        <div class="topo-tentativa">
 
           <div>
 
@@ -83,6 +145,7 @@
 
             </span>
 
+
             <h2>
               {{ resultado.quizTitulo }}
             </h2>
@@ -92,7 +155,9 @@
 
           <div class="pontuacao">
 
-            {{ resultado.pontuacao }}
+            <strong>
+              {{ resultado.pontuacao }}
+            </strong>
 
             <span>
               pts
@@ -106,39 +171,29 @@
         <div class="informacoes">
 
           <span>
-
             ✅
-
             {{ resultado.acertos }}
-
             de
-
             {{ resultado.totalPerguntas }}
-
           </span>
 
 
           <span>
-
             {{
               formatarDificuldade(
                 resultado.dificuldade
               )
             }}
-
           </span>
 
 
           <span>
-
             🕒
-
             {{
               formatarData(
                 resultado.dataRealizacao
               )
             }}
-
           </span>
 
         </div>
@@ -151,18 +206,22 @@
             [style.width.%]="
               resultado.pontuacao
             "
-          ></div>
+          >
+          </div>
 
         </div>
 
-      </div>
+      </article>
 
-    </div>
+    </section>
 
 
     <div
+      *ngIf="
+        !carregando &&
+        !erro
+      "
       class="acoes"
-      *ngIf="!carregando"
     >
 
       <button
@@ -182,6 +241,6 @@
 
     </div>
 
-  </div>
+  </main>
 
 </div>

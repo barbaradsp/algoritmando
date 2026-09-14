@@ -1,5 +1,6 @@
 package com.algoritmando.controller;
 
+import com.algoritmando.dto.DesempenhoResponse;
 import com.algoritmando.dto.HistoricoResultadoResponse;
 import com.algoritmando.dto.ResultadoRequest;
 import com.algoritmando.dto.ResultadoResponse;
@@ -51,6 +52,23 @@ public class ResultadoController {
         return ResponseEntity.ok(
                 resultadoService
                         .listarHistorico(
+                                email
+                        )
+        );
+    }
+
+    @GetMapping("/desempenho")
+    public ResponseEntity<DesempenhoResponse>
+    obterDesempenho(
+
+            @RequestParam
+            String email
+
+    ) {
+
+        return ResponseEntity.ok(
+                resultadoService
+                        .obterDesempenho(
                                 email
                         )
         );

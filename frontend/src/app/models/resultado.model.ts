@@ -47,3 +47,10 @@ export interface HistoricoResultado {
   totalPerguntas: number;
   dataRealizacao: string;
 }
+
+export interface DesempenhoUsuario {
+  totalTentativas: number;
+  quizzesRealizados: number;
+  mediaPontuacao: number;
+  melhorPontuacao: number;
+}
