@@ -1,0 +1,262 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+
+.pagina-ranking {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 50px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #667eea,
+      #764ba2
+    );
+}
+
+
+.ranking-container {
+  width: 100%;
+  max-width: 700px;
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 36px;
+
+  box-shadow:
+    0 20px 50px
+    rgba(0, 0, 0, 0.18);
+}
+
+
+.cabecalho {
+  text-align: center;
+
+  margin-bottom: 32px;
+}
+
+
+.trofeu {
+  font-size: 48px;
+
+  margin-bottom: 8px;
+}
+
+
+.cabecalho h1 {
+  margin: 0;
+
+  font-size: 32px;
+
+  color: #26233a;
+}
+
+
+.cabecalho p {
+  margin-top: 8px;
+
+  color: #777;
+
+  font-size: 16px;
+}
+
+
+.lista-ranking {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 18px;
+
+  border-radius: 16px;
+
+  background: #f7f7fb;
+
+  border:
+    2px solid transparent;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.ranking-item:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(0, 0, 0, 0.08);
+}
+
+
+.ranking-item.usuario-atual {
+  border-color: #7258d6;
+
+  background: #f4f0ff;
+}
+
+
+.posicao {
+  width: 48px;
+
+  text-align: center;
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+  color: #555;
+}
+
+
+.usuario {
+  flex: 1;
+}
+
+
+.nome {
+  font-size: 17px;
+
+  font-weight: 700;
+
+  color: #29263a;
+}
+
+
+.acertos {
+  margin-top: 4px;
+
+  color: #858291;
+
+  font-size: 14px;
+}
+
+
+.voce {
+  display: inline-block;
+
+  margin-left: 6px;
+
+  padding: 3px 8px;
+
+  border-radius: 20px;
+
+  background: #7258d6;
+
+  color: white;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+.pontuacao {
+  display: flex;
+  align-items: baseline;
+
+  gap: 4px;
+
+  color: #7258d6;
+}
+
+
+.pontuacao strong {
+  font-size: 24px;
+}
+
+
+.pontuacao span {
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+.mensagem {
+  text-align: center;
+
+  padding: 30px;
+
+  color: #777;
+}
+
+
+.mensagem.erro {
+  color: #b42318;
+}
+
+
+.btn-voltar {
+  width: 100%;
+
+  margin-top: 28px;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #7258d6;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+.btn-voltar:hover {
+  opacity: 0.92;
+}
+
+
+@media (
+max-width: 600px
+) {
+
+  .ranking-container {
+    padding: 24px 18px;
+  }
+
+
+  .ranking-item {
+    padding: 14px;
+  }
+
+
+  .posicao {
+    width: 38px;
+
+    font-size: 20px;
+  }
+
+
+  .pontuacao strong {
+    font-size: 20px;
+  }
+}

@@ -10,6 +10,7 @@ import {
   ResultadoRequest,
   ResultadoResponse
 } from '../models/resultado.model';
+import { RankingResultado } from '../models/ranking.model';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +78,17 @@ export class ApiService {
           email
         }
       }
+    );
+  }
+
+  listarRanking(
+    quizId: number
+  ): Observable<RankingResultado[]> {
+
+    return this.http.get<
+      RankingResultado[]
+    >(
+      `${this.baseUrl}/quizzes/${quizId}/ranking`
     );
   }
 }

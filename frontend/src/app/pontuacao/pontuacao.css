@@ -2,9 +2,7 @@
   min-height: 100vh;
 
   display: flex;
-
   justify-content: center;
-
   align-items: center;
 
   background:
@@ -16,6 +14,8 @@
 
   padding: 30px;
 
+  box-sizing: border-box;
+
   font-family:
     'Segoe UI',
     sans-serif;
@@ -23,16 +23,17 @@
 
 .card {
   width: 100%;
-
-  max-width: 560px;
+  max-width: 900px;
 
   background: white;
 
   border-radius: 18px;
 
-  padding: 42px;
+  padding: 48px;
 
   text-align: center;
+
+  box-sizing: border-box;
 
   box-shadow:
     0 15px 40px
@@ -41,7 +42,6 @@
 
 .card h2 {
   margin-top: 0;
-
   margin-bottom: 12px;
 
   font-size: 1.8rem;
@@ -54,7 +54,7 @@
 
   font-weight: 700;
 
-  margin-bottom: 28px;
+  margin-bottom: 36px;
 }
 
 .pontuacao-destaque {
@@ -72,8 +72,9 @@
 
   font-size: 1.05rem;
 
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
+
 
 .barra-acertos {
   width: 100%;
@@ -86,8 +87,9 @@
 
   overflow: hidden;
 
-  margin-bottom: 30px;
+  margin-bottom: 36px;
 }
+
 
 .barra-fill {
   height: 100%;
@@ -101,38 +103,64 @@
 }
 
 .acoes {
+  width: 100%;
+
   display: flex;
 
   justify-content: center;
+  align-items: stretch;
 
-  gap: 12px;
+  gap: 14px;
+
+  box-sizing: border-box;
 }
 
+
 .acoes button {
-  padding: 12px 20px;
+  flex: 1;
+
+  min-width: 0;
+
+  min-height: 54px;
+
+  padding: 12px 14px;
 
   border-radius: 9px;
 
   font-size: 1rem;
 
+  font-family:
+    'Segoe UI',
+    sans-serif;
+
   cursor: pointer;
 
-  transition: 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
 
-  min-width: 160px;
+  box-sizing: border-box;
 }
 
 .btn-principal {
-  border: none;
+  border: 1px solid #6366f1;
 
   background: #6366f1;
 
   color: white;
 }
 
+
 .btn-principal:hover {
   background: #4f46e5;
+
+  border-color: #4f46e5;
+
+  transform:
+    translateY(-1px);
 }
+
 
 .btn-secundario {
   background: white;
@@ -142,31 +170,83 @@
   color: #6366f1;
 }
 
+
 .btn-secundario:hover {
   background: #eef2ff;
+
+  transform:
+    translateY(-1px);
 }
 
 .erro {
   color: #dc2626;
 }
 
+
+@media (
+max-width: 850px
+) {
+
+  .card {
+    max-width: 700px;
+
+    padding: 40px 32px;
+  }
+
+
+  .acoes {
+    flex-wrap: wrap;
+  }
+
+
+  .acoes button {
+    flex:
+      1 1
+      calc(50% - 7px);
+  }
+}
+
 @media (
 max-width: 600px
 ) {
 
+  .container {
+    padding: 20px;
+  }
+
+
   .card {
-    padding: 30px 20px;
+    max-width: 100%;
+
+    padding: 32px 20px;
   }
 
-  .acoes {
-    flex-direction: column;
+
+  .card h2 {
+    font-size: 1.6rem;
   }
 
-  .acoes button {
-    width: 100%;
+
+  .quiz-nome {
+    margin-bottom: 28px;
   }
+
 
   .pontuacao-destaque {
     font-size: 2.6rem;
+  }
+
+
+  .acoes {
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+
+  .acoes button {
+    width: 100%;
+
+    flex: none;
   }
 }
