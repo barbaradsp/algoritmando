@@ -49,9 +49,6 @@
   font-size: 1.05rem;
 }
 
-
-/* RESUMO */
-
 .resumo {
   display: grid;
 
@@ -104,9 +101,6 @@
 .resumo-card.destaque {
   background: #f5f3ff;
 }
-
-
-/* LISTA */
 
 .lista {
   display: flex;
@@ -234,9 +228,6 @@
     width 0.4s ease;
 }
 
-
-/* BOTÕES */
-
 .acoes {
   display: flex;
 
@@ -298,9 +289,6 @@
     );
 }
 
-
-/* MENSAGENS */
-
 .mensagem {
   padding: 30px;
 
@@ -314,9 +302,6 @@
   color: #fecaca;
 }
 
-
-/* TABLET */
-
 @media (
 max-width: 800px
 ) {
@@ -326,9 +311,6 @@ max-width: 800px
       repeat(2, 1fr);
   }
 }
-
-
-/* CELULAR */
 
 @media (
 max-width: 550px

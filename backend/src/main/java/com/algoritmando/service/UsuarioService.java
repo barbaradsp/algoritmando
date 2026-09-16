@@ -57,13 +57,6 @@ public class UsuarioService {
                         .findByEmailIgnoreCase(email)
                         .map(usuarioExistente -> {
 
-                            /*
-                             * Caso o mesmo e-mail seja usado novamente,
-                             * consideramos que é o mesmo usuário.
-                             *
-                             * Se o nome tiver sido alterado,
-                             * atualizamos o cadastro.
-                             */
                             if (
                                     !usuarioExistente
                                             .getNome()

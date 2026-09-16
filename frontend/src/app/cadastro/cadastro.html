@@ -1,76 +1,186 @@
 <div class="container">
 
-  <div class="card">
+  <main class="card">
 
-    <h2>
-      📝 Cadastro
-    </h2>
+    <div class="icone">
+      👤
+    </div>
 
-    <p class="quiz-selecionado">
-      Quiz:
+
+    <h1>
+      Antes de começar
+    </h1>
+
+
+    <p class="descricao">
+
+      Você escolheu
+
       <strong>
         {{ quizState.quizTitulo }}
       </strong>
+
     </p>
 
-    <p class="subtitle">
-      Preencha seus dados para começar o quiz.
-    </p>
 
     <form
+      [formGroup]="cadastroForm"
       (ngSubmit)="cadastrar()"
+      novalidate
     >
 
-      <label for="nome">
-        Nome
-      </label>
+      <!-- NOME -->
 
-      <input
-        id="nome"
-        type="text"
-        [(ngModel)]="nome"
-        name="nome"
-        required
-        placeholder="Seu nome"
-      />
+      <div class="campo">
 
-      <label for="email">
-        Email
-      </label>
+        <label for="nome">
+          Nome
+        </label>
 
-      <input
-        id="email"
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        required
-        placeholder="seu@email.com"
-      />
+
+        <input
+          id="nome"
+          type="text"
+
+          formControlName="nome"
+
+          placeholder="Digite seu nome"
+
+          maxlength="100"
+
+          autocomplete="name"
+
+          [class.input-invalido]="
+            campoInvalido('nome')
+          "
+
+          [attr.aria-invalid]="
+            campoInvalido('nome')
+          "
+
+          aria-describedby="erro-nome"
+
+          (input)="
+            limparErroServidor(
+              'nome'
+            )
+          "
+        >
+
+
+        <small
+          id="erro-nome"
+
+          class="mensagem-erro"
+
+          *ngIf="
+            campoInvalido('nome')
+          "
+        >
+          {{ mensagemNome() }}
+        </small>
+
+      </div>
+
+
+      <!-- EMAIL -->
+
+      <div class="campo">
+
+        <label for="email">
+          E-mail
+        </label>
+
+
+        <input
+          id="email"
+          type="email"
+
+          formControlName="email"
+
+          placeholder="seuemail@exemplo.com"
+
+          maxlength="254"
+
+          autocomplete="email"
+
+          [class.input-invalido]="
+            campoInvalido('email')
+          "
+
+          [attr.aria-invalid]="
+            campoInvalido('email')
+          "
+
+          aria-describedby="erro-email"
+
+          (input)="
+            limparErroServidor(
+              'email'
+            )
+          "
+        >
+
+
+        <small
+          id="erro-email"
+
+          class="mensagem-erro"
+
+          *ngIf="
+            campoInvalido('email')
+          "
+        >
+          {{ mensagemEmail() }}
+        </small>
+
+      </div>
+
+
+      <!-- ERRO GERAL -->
+
+      <div
+        class="erro-geral"
+
+        *ngIf="
+          erroGeral
+        "
+      >
+        ⚠️ {{ erroGeral }}
+      </div>
+
+
+      <!-- BOTÃO -->
 
       <button
         type="submit"
-        [disabled]="
-          !nome ||
-          !email ||
-          carregando
-        "
-      >
-        {{
-          carregando
-            ? 'Enviando...'
-            : 'Continuar'
-        }}
-      </button>
 
-      <p
-        class="erro"
-        *ngIf="erro"
+        class="btn-principal"
+
+        [disabled]="carregando"
       >
-        {{ erro }}
-      </p>
+
+        <span
+          *ngIf="
+            !carregando
+          "
+        >
+          Começar quiz
+        </span>
+
+
+        <span
+          *ngIf="
+            carregando
+          "
+        >
+          Cadastrando...
+        </span>
+
+      </button>
 
     </form>
 
-  </div>
+  </main>
 
 </div>
