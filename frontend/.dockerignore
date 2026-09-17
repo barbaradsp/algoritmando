@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.angular/
+
+.idea/
+*.iml
+
+.git/
+.gitignore
+
+npm-debug.log*

@@ -1,0 +1,36 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    container_name: algoritmando-backend
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - algoritmando-data:/app/data
+
+    restart: unless-stopped
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    container_name: algoritmando-frontend
+
+    ports:
+      - "4200:80"
+
+    depends_on:
+      - backend
+
+    restart: unless-stopped
+
+
+volumes:
+  algoritmando-data:
