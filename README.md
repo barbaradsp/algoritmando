@@ -108,12 +108,6 @@ docker compose down -v
 
 # 📸 Demonstração
 
-As imagens da aplicação podem ser armazenadas em:
-
-```text
-docs/images/
-```
-
 ## Tela inicial
 
 ![Tela inicial do Algoritmando](docs/images/home.png)
@@ -671,4 +665,4 @@ O projeto pode evoluir com funcionalidades como:
 
 **Bárbara dos Santos Pimenta**
 
-Projeto desenvolvido para fins acadêmicos no curso de **Engenharia de Software**.
+Projeto desenvolvido para fins acadêmicos no curso de **Engenharia de Software** da UNINTER.
