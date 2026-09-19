@@ -8,6 +8,25 @@ O projeto foi desenvolvido utilizando **Angular** no frontend e **Spring Boot** 
 
 ---
 
+<a id="sumario"></a>
+
+# 📑 Sumário
+
+- [🚀 Execução rápida](#execucao-rapida)
+- [📸 Demonstração](#demonstracao)
+- [🔄 Fluxo da aplicação](#fluxo)
+- [💻 Execução sem Docker](#execucao-manual)
+- [🌐 API REST](#api)
+- [🏆 Ranking](#ranking)
+- [📊 Desempenho](#desempenho)
+- [✅ Validações](#validacoes)
+- [💾 Persistência](#persistencia)
+- [🐳 Docker](#docker)
+- [🚀 Possíveis evoluções futuras](#evolucoes)
+- [👩‍💻 Autora](#autora)
+
+---
+
 <a id="execucao-rapida"></a>
 
 # 🚀 Execução rápida
@@ -82,24 +101,6 @@ docker compose down -v
 
 > ⚠️ O comando `docker compose down -v` remove os dados armazenados no banco.
 
----
-
-<a id="sumario"></a>
-
-# 📑 Sumário
-
-- [🚀 Execução rápida](#execucao-rapida)
-- [📸 Demonstração](#demonstracao)
-- [🔄 Fluxo da aplicação](#fluxo)
-- [💻 Execução sem Docker](#execucao-manual)
-- [🌐 API REST](#api)
-- [🏆 Ranking](#ranking)
-- [📊 Desempenho](#desempenho)
-- [✅ Validações](#validacoes)
-- [💾 Persistência](#persistencia)
-- [🐳 Docker](#docker)
-- [🚀 Possíveis evoluções futuras](#evolucoes)
-- [👩‍💻 Autora](#autora)
 
 ---
 
