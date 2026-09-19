@@ -31,7 +31,7 @@ O projeto foi desenvolvido utilizando **Angular** no frontend e **Spring Boot** 
 
 # 🚀 Execução rápida
 
-A forma recomendada de executar o projeto é utilizando **Docker Compose**. Abaixo, no sumário clicável, também está disponível uma forma de execução sem utilizar Docker Compose.
+A forma recomendada de executar o projeto é utilizando **Docker Compose**. Também está disponível outra forma de execução, sem utilizar Docker Compose.
 
 ## Pré-requisitos
 
